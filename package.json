@@ -1,0 +1,30 @@
+{
+  "name": "socket-talk",
+  "version": "1.0.0",
+  "description": "Socket-Talk is a real-time chat application built on the MERN stack. It leverages JWT for secure authentication and Socket.io for seamless, live messaging.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Huzaifa-Khan12/Socket-Talk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Huzaifa-Khan12/Socket-Talk/issues"
+  },
+  "homepage": "https://github.com/Huzaifa-Khan12/Socket-Talk#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.11.0",
+    "socket.io": "^4.8.1"
+  }
+}
