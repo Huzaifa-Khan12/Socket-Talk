@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   fullName: {
-    tpye: String,
+    type: String,
     required: true,
   },
   username: {
@@ -11,14 +11,14 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   password: {
-    tpye: String,
+    type: String,
     required: true,
     minlength: 6,
   },
   gender: {
     type: String,
     required: true,
-    enum: ["Male", "Female"],
+    enum: ["male", "female"],
   },
   profilePic: {
     type: String,
