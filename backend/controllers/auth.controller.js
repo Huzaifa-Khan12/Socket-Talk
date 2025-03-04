@@ -58,10 +58,35 @@ export const signup = async (req, res) => {
   }
 };
 
-export const logout = (req, res) => {
-  res.send("Logout Route");
+export const login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user?.password || "" //using optional chaining to check is user or the property exist or not
+    );
+
+    //check if credentials are correct or exist
+    if (!user || !isPasswordCorrect) {
+      return res.status(400).json({ error: "Invalid username or password" });
+    }
+
+    //generate JWT and cookie
+    generateTokenAndSetCookie(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.log("Error in signup controller", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
-export const login = (req, res) => {
-  res.send("SignUp Route");
+export const logout = (req, res) => {
+  res.send("Logout Route");
 };
