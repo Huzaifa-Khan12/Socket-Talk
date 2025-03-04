@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
-import error from "mongoose/lib/error/index.js";
+import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
     }
 
     //hashing the password using bcrypt
-    const salt = await bcrypt.salt(12);
+    const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     //using the public api "https://avatar-placeholder.iran.liara.run/" to get a random avatar
@@ -35,6 +35,9 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
+      //Generating JWT token, which is based on UserId
+      generateTokenAndSetCookie(newUser._id, res);
+
       await newUser.save();
 
       //sending response to the cleint
@@ -50,7 +53,7 @@ export const signup = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("Error in signup controller", error.message);
+    console.log("Error in signup controller", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
