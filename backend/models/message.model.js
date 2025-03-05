@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema(
       ref: "User", //this means it is refering the SenderId will be from the User model
       required: true,
     },
-    reciverId: {
+    recieverId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User", //this means it is refering the SenderId will be from the User model
       required: true,
