@@ -12,9 +12,7 @@ const Login = () => {
         <form>
           <div>
             <label className="label p-2">
-              <span className="text-base label-text text-gray-200">
-                Username
-              </span>
+              <span className="text-base text-gray-200">Username</span>
             </label>
             <input
               type="text"
@@ -25,9 +23,7 @@ const Login = () => {
 
           <div>
             <label className="label p-2">
-              <span className="text-base label-text  text-gray-200">
-                Password
-              </span>
+              <span className="text-base  text-gray-200">Password</span>
             </label>
             <input
               type="password"
