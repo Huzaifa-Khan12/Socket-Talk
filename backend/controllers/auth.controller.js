@@ -61,11 +61,14 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log(username, password);
+
     const user = await User.findOne({ username });
     const isPasswordCorrect = await bcrypt.compare(
       password,
       user?.password || "" //using optional chaining to check is user or the property exist or not
     );
+    console.log(user, isPasswordCorrect);
 
     //check if credentials are correct or exist
     if (!user || !isPasswordCorrect) {
