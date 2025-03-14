@@ -55,9 +55,7 @@ export const getMessages = async (req, res) => {
     //populate method gets the messages references from Message model and populates the actual messages in the Conversation records
     //So instead of getting Array of Message Ids, we get Array of Objects containg the message records
 
-    if (!conversation) res.status(200).json([]); //send an empty array is conversation does not exist
-
-    res.status(200).json(conversation.messages);
+    res.status(200).json(conversation?.messages || []);
   } catch (error) {
     console.log("Error in send message controller", error);
     res.status(500).json({ error: "Internal server error" });
