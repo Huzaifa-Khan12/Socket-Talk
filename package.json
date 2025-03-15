@@ -4,7 +4,9 @@
   "description": "Socket-Talk is a real-time chat application built on the MERN stack. It leverages JWT for secure authentication and Socket.io for seamless, live messaging.",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",
