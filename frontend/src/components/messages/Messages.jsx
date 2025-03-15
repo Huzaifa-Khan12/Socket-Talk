@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from "react";
 import Message from "./Message";
 import MessageSkeleton from "../skeletons/MessageSkeleten";
 import useGetMessages from "../../hooks/useGetMessages";
+import useListenMessages from "../../hooks/useListenMessages";
 
 const Messages = () => {
   const { messages, loading } = useGetMessages();
-
+  useListenMessages();
   //to make sure the last message displayed on the screen (auto scroll to last message)
   const lastMessageRef = useRef();
 
@@ -26,7 +27,7 @@ const Messages = () => {
             <Message message={message} />
           </div>
         ))}
-      ;{loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
+      {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
       {!loading && messages.length === 0 && (
         <p className="text-center">Send a message to start the conversation</p>
       )}

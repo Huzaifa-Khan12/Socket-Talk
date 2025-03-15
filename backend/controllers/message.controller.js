@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getRecieverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
   try {
@@ -35,6 +36,13 @@ export const sendMessage = async (req, res) => {
 
     //this make both save run in parallel
     await Promise.all([conversation.save(), newMessage.save()]);
+
+    //socket.io functionality
+    const recieverSocketId = getRecieverSocketId(recieverId);
+    if (recieverSocketId) {
+      //io.to() is used to send the event to only a particular user
+      io.to(recieverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {
